@@ -1,6 +1,3 @@
-
-
-
 function  CartaoVaga(vaga){
     const card =`
      <li class="vagaLI">
@@ -14,7 +11,7 @@ function  CartaoVaga(vaga){
     return card
 }
 
-async function CarregarVagas(req,res){
+async function CarregarVagas(){
 try{
     const VagasUl = document.querySelector('.vagasUl')
     console.log('buscando vagas na rota/ vagas')
@@ -22,6 +19,7 @@ try{
     const vagas = await response.json()
 
 if(vagas){
+    VagasUl.innerHTML = ''; // Limpa o conteúdo de exemplo
     console.log('vagas encontradas')
     vagas.forEach(dado => {
         const vagacard = CartaoVaga(dado)
@@ -30,4 +28,5 @@ if(vagas){
 catch(error){
     console.log('erro ao carregar vagas de /vagas',error)
 }};
-ç
+
+document.addEventListener('DOMContentLoaded', CarregarVagas);
