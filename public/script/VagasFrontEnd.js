@@ -8,9 +8,7 @@ function  CartaoVaga(vaga){
                 <a href="vaga-sobre">ver vaga</a>
             </li>
     `
-    return card
-}
-
+    return card} 
 async function CarregarVagas(){
 try{
     const VagasUl = document.querySelector('.vagasUl')
