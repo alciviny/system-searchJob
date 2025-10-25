@@ -14,7 +14,8 @@ class VagasService {
         const params = new URLSearchParams({
             app_id: appId,
             app_key: appkey,
-            results_per_page: '20'
+            results_per_page: '50',
+            where: 'Brasil'.toLowerCase()
         });
         const url = `https://api.adzuna.com/v1/api/jobs/br/search/1?${params.toString()}`;
 
@@ -31,7 +32,9 @@ class VagasService {
                 titulo: vaga.title || '',
                 empresa: vaga.company?.display_name || '',
                 localizacao: vaga.location?.display_name || '',
-                url: vaga.redirect_url || ''
+                url: vaga.redirect_url || '',
+                descricao: vaga.description || ""
+                
             }));
 
             console.log(`numero de vagas encontradas: ${vagasEncontradas.length}`);
@@ -90,6 +93,8 @@ class VagasService {
         console.log(`Encontramos um total de ${vagasAgregadas.length} vagas.`);
         return vagasAgregadas;
     }
+
+  
 }
 
 module.exports = VagasService;
