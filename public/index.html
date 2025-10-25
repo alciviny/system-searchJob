@@ -7,6 +7,13 @@
 
 </head>
 <body>
+    <section class="busca-avancada">
+        <form action="post" class="formFiltro">
+        <input name="cargo" type="text" id="filtro-cargo" placeholder="digite o cargo">
+        <input name="localizacao" type="text" id="filtro-localizacao" placeholder="digite a localizacao">
+        <button id="btn-buscar" type="submit">buscar</button>
+    </form>
+    </section>
     <section class="vagas">
         <h1>Vagas encontradas</h1>
         <ul class="vagasUl">
@@ -20,6 +27,7 @@
         </ul>
     </section>
     <script src="script/VagasFrontEnd.js"></script>
+    <script src="script/filtrovagas.js"></script>
 
 </body>
 </html>
