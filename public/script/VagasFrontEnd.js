@@ -1,4 +1,4 @@
-const formulario = document.querySelector('.formFiltro')
+const formulario = document.querySelector('.search-container')
 
 function  CartaoVaga(vaga){
     const card =`
@@ -6,12 +6,14 @@ function  CartaoVaga(vaga){
                 <h3 class="vaga-titulo">${vaga.titulo}</h3>
                 <h4 class="vaga-empresa">${vaga.empresa}</h4>
                 <p class="vaga-localizacao">${vaga.localizacao}</p>
-                <p class="vaga-descricao">${vaga.descricao}</p>
-                <a href="vaga-sobre">ver vaga</a>
+                <p class="vaga-data">${vaga.data}</p>
+                <p class="vaga-sobre"><button>saiba mais</button></p>
             </li>
     `
     return card} 
- 
+/*  <p class="vaga-descricao">${vaga.descricao}</p>
+<p class="vaga-descricao">${vaga.contrato}</p> */
+/*  */
 async function CarregarVagas(){
 try{
     const VagasUl = document.querySelector('.vagasUl')
@@ -22,6 +24,7 @@ try{
 
 
 if(vagas){
+    console.log(vagas)
     VagasUl.innerHTML = ''; // Limpa o conteúdo de exemplo
     console.log('vagas encontradas')
     vagas.forEach(dado => {

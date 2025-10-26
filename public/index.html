@@ -3,31 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VagasBr</title>
-
+    <title>VagasBrasil</title>
+    <link rel="stylesheet" href="script/src/vagas.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/197/197386.png">
+    <link rel="stylesheet" href="./script/src/formulario.css">
 </head>
 <body>
+
+    
     <section class="busca-avancada">
-        <form action="post" class="formFiltro">
-        <input name="cargo" type="text" id="filtro-cargo" placeholder="digite o cargo">
-        <input name="localizacao" type="text" id="filtro-localizacao" placeholder="digite a localizacao">
-        <button id="btn-buscar" type="submit">buscar</button>
+     <form class="search-container" action="#" method="post">
+        <div class="input-group">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="search-input" placeholder="Função ou Palavra Chave" name="cargo">
+        </div>
+
+        <div class="divider"></div>
+        
+        <div class="input-group">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" class="search-input" placeholder="Cidade/Estado" name="localizacao">
+        </div>
+        
+        <button type="submit" class="search-button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Buscar Vagas
+        </button>
     </form>
+
     </section>
-    <section class="vagas">
-        <h1>Vagas encontradas</h1>
-        <ul class="vagasUl">
-            <li class="vagaLI">
-                <h3 class="vaga-titulo"></h3>
-                <h4 class="vaga-empresa"></h4>
-                <p class="vaga-localizacao"></p>
-                <p class="vaga-descricao"></p>
-                <a href="vaga-sobre">ver vaga</a>
-            </li>
-        </ul>
-    </section>
+    <main class="main-container">
+        <div class="vaga">
+            <h1>Vagas encontradas</h1>
+            <ul class="vagasUl">
+                <li class="vagaLI">
+                    <h3 class="vaga-titulo"></h3>
+                    <h4 class="vaga-empresa"></h4>
+                    <p class="vaga-localizacao"></p>
+                    <p class="vaga-descricao"></p>
+                     <p class="vaga-sobre"><button>saiba mais</button></p>
+                </li>
+            </ul>
+        </div>
+        <div class="sobre">
+            
+        </div>
+    </main>
     <script src="script/VagasFrontEnd.js"></script>
-    <script src="script/filtrovagas.js"></script>
+    
 
 </body>
 </html>

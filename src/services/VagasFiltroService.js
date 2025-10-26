@@ -16,7 +16,7 @@ class VagasFiltroService{
      const params = new  URLSearchParams({
         app_id:Ad_Id,
         app_key:Ad_Key,
-        results_per_page:'50',
+        results_per_page:'100',
         
      })
 
@@ -44,9 +44,14 @@ class VagasFiltroService{
                 empresa: vaga.company?.display_name || '',
                 localizacao: vaga.location?.display_name || '',
                 url: vaga.redirect_url || '',
-                   descricao: vaga.description || ""
+                   descricao: vaga.description || "",
+                /*    salarioMinimo: vaga.salary.min || "",
+                   salarioMaximo: vaga.salary.max || "", */
+                   contrato: vaga.contract_time || "",
+                   data: vaga.created || ""
+
            }))
-           //retorna ele ja tratado
+          console.log(vagasFiltradas)
            return vagasFiltradas
      }catch(error){
         console.error('Erro ao buscar na API Adzuna:', error)

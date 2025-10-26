@@ -1,0 +1,49 @@
+/* Definições Globais e Reset Básico */
+:root {
+  --cor-primaria: #002776; /* Azul da bandeira do Brasil */
+  --cor-secundaria: #6c757d; /* Cinza neutro */
+  --cor-destaque-amarelo: #FFC107; /* Amarelo/dourado para detalhes */
+  --cor-destaque-verde: #28a745; /* Verde para outros destaques */
+  --cor-fundo: #f8f9fa; /* Cinza muito claro */
+  --cor-texto: #212529; /* Preto suave */
+  --cor-branco: #ffffff;
+  --sombra-cartao: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --raio-borda: 8px; /* Raio de borda padronizado */
+}
+
+/* Reset e Padrões Globais */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utilitários */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}

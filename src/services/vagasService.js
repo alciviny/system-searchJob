@@ -33,7 +33,9 @@ class VagasService {
                 empresa: vaga.company?.display_name || '',
                 localizacao: vaga.location?.display_name || '',
                 url: vaga.redirect_url || '',
-                descricao: vaga.description || ""
+                descricao: vaga.description || "",
+                contrato: vaga.contract_time || "",
+                data: vaga.created || ""
                 
             }));
 

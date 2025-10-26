@@ -1,0 +1,79 @@
+
+.main-container {
+  display: flex;
+}
+
+.vaga, .sobre {
+  width: 50%;
+  padding: 20px;
+}
+
+/* Estilos para a seção de vagas e os cards */
+.vagas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--cor-fundo);
+}
+
+.vagasUl {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.vagaLI {
+  background-color: var(--cor-branco);
+  border-radius: var(--raio-borda);
+  box-shadow: var(--sombra-cartao);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vagaLI:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.vaga-titulo {
+  font-size: 1.5rem;
+  color: var(--cor-primaria);
+  margin-bottom: 10px;
+}
+
+.vaga-empresa {
+  font-size: 1.1rem;
+  color: var(--cor-secundaria);
+  margin-bottom: 15px;
+}
+
+.vaga-localizacao,
+.vaga-data {
+  font-size: 0.9rem;
+  color: var(--cor-texto);
+  margin-bottom: 5px;
+}
+
+.vaga-sobre {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.vaga-sobre button {
+  background-color: var(--cor-destaque-verde);
+  color: var(--cor-branco);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.vaga-sobre button:hover {
+  background-color: #218838; /* Verde mais escuro para o hover */
+}
