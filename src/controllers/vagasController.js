@@ -21,12 +21,22 @@ class VagasController {
   static async filtrodeVagas(req,res){
     try{
 
-      //pega  o cargo e localizacao como requisicoes que sao usadas no url da api
-     const {cargo,localizacao}= req.query
+      // Pega cargo, localizacao e a nova 'page' da requisição
+     const {cargo, localizacao, page, data}= req.query
+
+     // Monta o objeto de filtro, incluindo a página
+     const filtro = {
+        cargo: cargo || '',
+        localizacao: localizacao || '',
+        max_days_old: (data && data !== '0') ? data : '', // Ignora o filtro se data for '0' ou não existir
+        page: parseInt(page, 10) || 1 // Garante que 'page' seja um número
+     };
+
      //cria uma constante que vai guardar o valor da nossa funcao de filtro
-      const vagasFiltro = await VagasFiltroService.filtrarvaga({cargo,localizacao})
+      const vagasFiltro = await VagasFiltroService.filtrarvaga(filtro)
+
       //confirma que se existir o status é 200
-      if (vagasFiltro) res.status(200).json(vagasFiltro)
+      res.status(200).json(vagasFiltro)
 
   } catch(error){
       console.error("erro ao buscar vagas filtradas no vagafiltroservice", error)

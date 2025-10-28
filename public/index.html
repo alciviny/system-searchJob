@@ -4,54 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VagasBrasil</title>
-    <link rel="stylesheet" href="script/src/vagas.css">
-    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="script/src/vagas.css"> <!-- Único arquivo de estilo necessário -->
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/197/197386.png">
-    <link rel="stylesheet" href="./script/src/formulario.css">
 </head>
 <body>
-
     
-    <section class="busca-avancada">
-     <form class="search-container" action="#" method="post">
-        <div class="input-group">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" class="search-input" placeholder="Função ou Palavra Chave" name="cargo">
+    <header class="main-header">
+        <a href="/" class="logo">VagasBrasil</a>
+        <div class="header-content">
+            <nav>
+                <ul>
+                    <li><a href="#">Vagas</a></li>
+                    <li><a href="#">Empresas</a></li>
+                    <li><a href="#">Sobre</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-login">Login</button>
+                <button class="btn btn-register">Cadastrar</button>
+            </div>
         </div>
-
-        <div class="divider"></div>
-        
-        <div class="input-group">
-            <i class="fa-solid fa-location-dot"></i>
-            <input type="text" class="search-input" placeholder="Cidade/Estado" name="localizacao">
-        </div>
-        
-        <button type="submit" class="search-button">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            Buscar Vagas
-        </button>
-    </form>
-
-    </section>
+        <button class="hamburger-menu" aria-label="Abrir menu">&#9776;</button>
+    </header>
+   
     <main class="main-container">
+    <section class="busca-avancada">
+        <section class="formulario">
+            <form class="search-container" action="#" method="post">
+                <div class="input-group">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <input type="text" class="search-input" placeholder="Função ou Palavra Chave" name="cargo">
+                </div>
+    
+                <div class="divider"></div>
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    <input type="text" class="search-input" placeholder="Cidade/Estado" name="localizacao">
+                </div>
+                <div class="divider"></div>
+    
+                 <div class="input-group">
+                    <i class="fa-solid fa-calendar-day" aria-hidden="true"></i>
+                    <select id="filtro-data" name="data" class="search-input" required>
+                        <option value="0">Publicado em...</option>
+                        <option value="1">Últimas 24 horas</option>
+                        <option value="3">Últimos 3 dias</option>
+                        <option value="7">Últimos 7 dias</option>
+                        <option value="30">Últimos 30 dias</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="search-button">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    Buscar Vagas
+                </button>
+            </form>
+        </section>
+    </section>
+
         <div class="vaga">
             <h1>Vagas encontradas</h1>
             <ul class="vagasUl">
-                <li class="vagaLI">
+               <!--  <li class="vagaLI">
                     <h3 class="vaga-titulo"></h3>
                     <h4 class="vaga-empresa"></h4>
                     <p class="vaga-localizacao"></p>
                     <p class="vaga-descricao"></p>
                      <p class="vaga-sobre"><button>saiba mais</button></p>
-                </li>
+                </li> -->
             </ul>
+            <!-- Botão para carregar mais vagas -->
+            <div class="carregar-mais-container">
+                <button id="btn-carregar-mais" class="search-button" style="display: none;">Carregar Mais Vagas</button>
+            </div>
         </div>
         <div class="sobre">
-            
+           <div class="sobre-placeholder">
+                <i class="fa-solid fa-hand-pointer"></i>
+                <h3>Passe o mouse sobre uma vaga</h3>
+                <p>Veja os detalhes aqui</p>
+           </div>
         </div>
     </main>
+    <script src="script/DetalhesVaga.js"></script>
     <script src="script/VagasFrontEnd.js"></script>
     
+    <!-- Adicione o script de autenticação aqui -->
+
 
 </body>
 </html>

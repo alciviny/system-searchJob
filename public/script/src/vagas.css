@@ -1,26 +1,260 @@
 
-.main-container {
-  display: flex;
+/* ==========================================================================
+   1. Variáveis Globais e Reset
+   ========================================================================== */
+
+:root {
+  --cor-primaria: #002776;
+  --cor-secundaria: #6c757d;
+  --cor-destaque-amarelo: #FFC107;
+  --cor-destaque-verde: #28a745;
+  --cor-fundo: #f8f9fa;
+  --cor-texto: #212529;
+  --cor-branco: #ffffff;
+  --sombra-cartao: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --raio-borda: 8px;
+  --header-height: 80px; /* Altura do cabeçalho */
 }
 
-.vaga, .sobre {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
+  padding-top: var(--header-height); /* Espaço para o cabeçalho fixo */
+}
+
+a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   2. Layout Principal
+   ========================================================================== */
+
+.main-header {
+  background-color: var(--cor-branco);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.busca-avancada {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--cor-branco);
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.vaga,
+.sobre {
   width: 50%;
   padding: 20px;
 }
 
-/* Estilos para a seção de vagas e os cards */
-.vagas {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  background-color: var(--cor-fundo);
+.sobre {
+  background-color: #fdfdff;
+  border-left: 1px solid #e0e0e0;
 }
 
+/* ==========================================================================
+   3. Componentes
+   ========================================================================== */
+
+/* --- Componente: Cabeçalho --- */
+.main-header .logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, var(--cor-destaque-verde), var(--cor-destaque-amarelo), var(--cor-primaria));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.main-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.main-header nav a {
+  color: #4a5568;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+
+.main-header nav a:hover {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+
+.main-header .auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.main-header .auth-buttons .btn {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: var(--raio-borda);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.main-header .auth-buttons .btn-login {
+  background-color: transparent;
+  color: #2b6cb0;
+  border-color: #2b6cb0;
+}
+
+.main-header .auth-buttons .btn-register {
+  background-color: #2b6cb0;
+  color: var(--cor-branco);
+}
+
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--cor-primaria);
+}
+
+/* --- Componente: Formulário de Busca --- */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--cor-branco);
+  padding: 8px 12px;
+  border-radius: 50px;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 3px solid transparent;
+  background: linear-gradient(white, white) padding-box, linear-gradient(90deg, var(--cor-destaque-amarelo), var(--cor-destaque-verde), var(--cor-primaria)) border-box;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.input-group:has(input[name="localizacao"]),
+.input-group:has(select[name="data"]) {
+  flex-grow: 0.7;
+}
+
+.input-group i {
+  margin: 0 10px;
+  color: var(--cor-secundaria);
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  font-size: 16px;
+  color: var(--cor-texto);
+}
+
+.search-input::placeholder {
+  color: #b0b0b0;
+}
+
+.search-input[name="data"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  color: #b0b0b0;
+}
+
+.search-input[name="data"]:valid {
+  color: var(--cor-texto);
+}
+
+.search-input[name="data"] option {
+  color: var(--cor-texto);
+}
+
+.divider {
+  width: 1px;
+  height: 25px;
+  background-color: #e0e0e0;
+  margin: 0 15px;
+}
+
+.search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cor-primaria);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.search-button:hover {
+  background-color: #001f5a;
+}
+
+.search-button i {
+  margin-right: 8px;
+}
+
+/* --- Componente: Lista e Cards de Vagas --- */
 .vagasUl {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
@@ -32,6 +266,8 @@
   box-shadow: var(--sombra-cartao);
   padding: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .vagaLI:hover {
@@ -39,41 +275,232 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.vaga-titulo {
+.vaga .vaga-titulo,
+.vaga .vaga-empresa,
+.vaga .vaga-localizacao,
+.vaga .vaga-data {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vaga .vaga-titulo {
   font-size: 1.5rem;
   color: var(--cor-primaria);
   margin-bottom: 10px;
 }
 
-.vaga-empresa {
+.vaga .vaga-empresa {
   font-size: 1.1rem;
   color: var(--cor-secundaria);
   margin-bottom: 15px;
 }
 
-.vaga-localizacao,
-.vaga-data {
+.vaga .vaga-localizacao,
+.vaga .vaga-data {
   font-size: 0.9rem;
   color: var(--cor-texto);
   margin-bottom: 5px;
 }
 
 .vaga-sobre {
-  margin-top: 20px;
+  margin-top: auto; /* Empurra o botão para o final do card */
+  padding-top: 20px;
   text-align: right;
 }
 
-.vaga-sobre button {
+.vaga-botao-inscricao {
+  display: inline-block;
   background-color: var(--cor-destaque-verde);
   color: var(--cor-branco);
-  border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
-.vaga-sobre button:hover {
-  background-color: #218838; /* Verde mais escuro para o hover */
+.vaga-botao-inscricao:hover {
+  background-color: #218838;
+  color: var(--cor-branco);
+  text-decoration: none;
+}
+
+.carregar-mais-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* --- Componente: Detalhes da Vaga (Coluna Direita) --- */
+.sobre-vaga {
+  position: sticky;
+  top: calc(var(--header-height) + 20px);
+  max-height: calc(100vh - var(--header-height) - 40px);
+  overflow-y: auto;
+  padding: 20px;
+  background-color: var(--cor-branco);
+  border-radius: var(--raio-borda);
+}
+
+.sobre-vaga h1,
+.sobre-vaga h2 {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: break-word;
+}
+
+.sobre-descricao {
+  line-height: 1.6;
+  margin-top: 20px;
+  color: #333;
+}
+
+.sobre-descricao p,
+.sobre-descricao ul,
+.sobre-descricao li {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
+}
+
+.sobre-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* --- Estilos Aprimorados para Detalhes da Vaga --- */
+.sobre-vaga h1 {
+  font-size: 1.8rem;
+  color: var(--cor-primaria);
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+
+.sobre-vaga h2 {
+  font-size: 1.2rem;
+  color: var(--cor-secundaria);
+  font-weight: 500;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.sobre-informacoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: var(--cor-secundaria);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.sobre-informacoes h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- Componente: Placeholder da Coluna Direita --- */
+.sobre-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  color: var(--cor-secundaria);
+  opacity: 0.7;
+}
+
+.sobre-placeholder i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   4. Media Queries (Responsividade)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .vaga,
+  .sobre {
+    width: 100%;
+    border-left: none;
+    padding: 15px;
+  }
+
+  .sobre-vaga {
+    position: static; /* Remove o efeito sticky em telas menores */
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* --- Responsividade do Cabeçalho --- */
+  .header-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--cor-branco);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 0;
+  }
+
+  .header-content.active {
+    display: flex;
+  }
+
+  .main-header nav ul {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 0;
+  }
+
+  .main-header nav li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    padding: 1rem 0;
+    gap: 0.5rem;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  /* --- Responsividade do Formulário de Busca --- */
+  .search-container {
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 20px;
+    padding: 15px;
+  }
+
+  .search-container .divider {
+    display: none;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+    margin-left: 0;
+  }
 }

@@ -1,17 +1,16 @@
-/* Definições Globais e Reset Básico */
 :root {
-  --cor-primaria: #002776; /* Azul da bandeira do Brasil */
-  --cor-secundaria: #6c757d; /* Cinza neutro */
-  --cor-destaque-amarelo: #FFC107; /* Amarelo/dourado para detalhes */
-  --cor-destaque-verde: #28a745; /* Verde para outros destaques */
-  --cor-fundo: #f8f9fa; /* Cinza muito claro */
-  --cor-texto: #212529; /* Preto suave */
+  --cor-primaria: #002776;
+  --cor-secundaria: #6c757d; 
+  --cor-destaque-amarelo: #FFC107; 
+  --cor-destaque-verde: #28a745; 
+  --cor-fundo: #f8f9fa;
+  --cor-texto: #212529;
   --cor-branco: #ffffff;
   --sombra-cartao: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --raio-borda: 8px; /* Raio de borda padronizado */
+  --raio-borda: 8px; 
 }
 
-/* Reset e Padrões Globais */
+
 *,
 *::before,
 *::after {
@@ -25,6 +24,7 @@ body {
   background-color: var(--cor-fundo);
   color: var(--cor-texto);
   line-height: 1.6;
+  padding-top: 80px; 
 }
 
 a {
@@ -39,11 +39,4 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
-}
-
-/* Utilitários */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }

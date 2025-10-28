@@ -1,0 +1,129 @@
+/* Estilos para o cabeçalho */
+.main-header {
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    box-sizing: border-box;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.main-header .logo {
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--cor-destaque-verde), var(--cor-destaque-amarelo), var(--cor-primaria));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.main-header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.main-header nav a {
+    text-decoration: none;
+    color: #4a5568;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+}
+
+.main-header nav a:hover {
+    color: #2b6cb0;
+}
+
+.main-header .auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.main-header .auth-buttons .btn {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.main-header .auth-buttons .btn-login {
+    background-color: transparent;
+    color: #2b6cb0;
+    border-color: #2b6cb0;
+}
+
+.main-header .auth-buttons .btn-register {
+    background-color: #2b6cb0;
+    color: #ffffff;
+}
+
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--cor-primaria);
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--cor-branco);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        gap: 0;
+    }
+
+    .header-content.active {
+        display: flex;
+    }
+
+    .main-header nav ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        gap: 0;
+    }
+
+    .main-header nav li {
+        padding: 1rem 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .auth-buttons {
+        flex-direction: column;
+        padding: 1rem 0;
+        gap: 0.5rem;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+}
