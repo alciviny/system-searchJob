@@ -1,12 +1,12 @@
 # Como Contribuir para o Sistema VagaBot
 
-## 1. Configuração do Ambiente Local
+Este guia descreve como configurar o ambiente de desenvolvimento e os padrões que seguimos para manter o projeto organizado.
 
-Siga estes passos para ter uma cópia do projeto rodando em sua máquina.
+---
 
-**1.1. Clone o Repositório:**
+## 1. ⚙️ Configuração do Ambiente
 
-Use o seguinte comando para clonar o projeto:
+**1.1. Clone o repositório:**
 ```bash
 git clone git@github.com:alciviny/sistema-vagaBot.git
 ```
@@ -75,4 +75,3 @@ O formato é:
     ```
 2.  Abra o GitHub e crie um **Pull Request (PR)** da sua branch para a branch `master`.
 3.  No PR, descreva o que você fez e por quê. Se o PR resolve uma *Issue* existente, mencione o número dela (ex: `Resolve #42`).
-

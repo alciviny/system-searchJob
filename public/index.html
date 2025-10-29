@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VagasBrasil</title>
-    <link rel="stylesheet" href="script/src/vagas.css"> <!-- Único arquivo de estilo necessário -->
+    <link rel="stylesheet" href="script/src/vagas.css"> 
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/197/197386.png">
 </head>
 <body>
-    
+    <!-- Cabeçalho Principal -->
     <header class="main-header">
         <a href="/" class="logo">VagasBrasil</a>
         <div class="header-content">
@@ -26,7 +26,8 @@
         </div>
         <button class="hamburger-menu" aria-label="Abrir menu">&#9776;</button>
     </header>
-   
+    
+    <!-- Conteúdo Principal da Página -->
     <main class="main-container">
     <section class="busca-avancada">
         <section class="formulario">
@@ -35,7 +36,7 @@
                     <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                     <input type="text" class="search-input" placeholder="Função ou Palavra Chave" name="cargo">
                 </div>
-    
+                
                 <div class="divider"></div>
                 
                 <div class="input-group">
@@ -43,7 +44,7 @@
                     <input type="text" class="search-input" placeholder="Cidade/Estado" name="localizacao">
                 </div>
                 <div class="divider"></div>
-    
+                
                  <div class="input-group">
                     <i class="fa-solid fa-calendar-day" aria-hidden="true"></i>
                     <select id="filtro-data" name="data" class="search-input" required>
@@ -54,7 +55,6 @@
                         <option value="30">Últimos 30 dias</option>
                     </select>
                 </div>
-                
                 <button type="submit" class="search-button">
                     <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                     Buscar Vagas
@@ -62,17 +62,11 @@
             </form>
         </section>
     </section>
-
+        <!-- Seção de Listagem de Vagas -->
         <div class="vaga">
             <h1>Vagas encontradas</h1>
             <ul class="vagasUl">
-               <!--  <li class="vagaLI">
-                    <h3 class="vaga-titulo"></h3>
-                    <h4 class="vaga-empresa"></h4>
-                    <p class="vaga-localizacao"></p>
-                    <p class="vaga-descricao"></p>
-                     <p class="vaga-sobre"><button>saiba mais</button></p>
-                </li> -->
+               <!-- Vagas serão carregadas aqui via JavaScript -->
             </ul>
             <!-- Botão para carregar mais vagas -->
             <div class="carregar-mais-container">
@@ -87,11 +81,8 @@
            </div>
         </div>
     </main>
+    <!-- Scripts JavaScript -->
     <script src="script/DetalhesVaga.js"></script>
     <script src="script/VagasFrontEnd.js"></script>
-    
-    <!-- Adicione o script de autenticação aqui -->
-
-
 </body>
 </html>

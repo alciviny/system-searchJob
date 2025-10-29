@@ -1,21 +1,44 @@
-/**
- * Módulo para gerenciar a exibição dos detalhes da vaga.
- */
+// =================================================================
+// MÓDULO DE DETALHES DA VAGA
+// =================================================================
 
-// Função para criar o HTML da seção "sobre" com os detalhes da vaga.
+// --- Funções Auxiliares / UI ---
+function traduzirContrato(tipoContrato) {
+    if (!tipoContrato) return "";
+    const contratoLower = tipoContrato.toLowerCase();
+
+    switch (contratoLower) {
+        case 'full_time':
+        case 'full time':
+        case 'full-time':
+            return 'Tempo Integral';
+        case 'part_time':
+        case 'part time':
+        case 'part-time':
+            return 'Meio Período';
+        case 'internship':
+            return 'Estágio';
+        default:
+            return tipoContrato;
+    }
+}
+
 function criarCartaoSobre(vaga) {
     const dataFormatada = new Date(vaga.data).toLocaleDateString('pt-BR');
+    const contratoTraduzido = traduzirContrato(vaga.contrato);
+    const descricaoFormatada = vaga.descricao.replace(/\n/g, '<br>');
+
     return ` 
     <div class="sobre-vaga">
         <h1>${vaga.titulo}</h1>
         <h2>${vaga.empresa}</h2>
         <div class="sobre-informacoes">
-            <h3>${vaga.contrato || ''}</h3>
+            ${contratoTraduzido ? `<h3>${contratoTraduzido}</h3>` : ''}
             ${vaga.salario ? `<h3>Salário: ${vaga.salario}</h3>` : ''}
             <h3>${dataFormatada}</h3>
         </div>
         <div class="sobre-descricao">
-            ${vaga.descricao}
+            ${descricaoFormatada}
         </div>
         <div class="sobre-actions">
             <a href="${vaga.url}" target="_blank" class="vaga-botao-inscricao">Ver Vaga Completa</a>
@@ -23,15 +46,10 @@ function criarCartaoSobre(vaga) {
     </div>`;
 }
 
-/**
- * Inicializa o listener para exibir os detalhes da vaga ao clicar em um card.
- * @param {HTMLElement} vagasUlElement - O elemento <ul> que contém os cards das vagas.
- * @param {HTMLElement} vagasSobreElement - O elemento <div> onde os detalhes serão exibidos.
- * @param {function(): Array} getVagasCarregadas - Uma função que retorna o array com todas as vagas carregadas.
- */
+// --- Função Principal de Inicialização ---
 function inicializarDetalhesVaga(vagasUlElement, vagasSobreElement, getVagasCarregadas) {
 
-    // Função debounce para atrasar a execução do manipulador de eventos
+    // --- Função Interna (Debounce) ---
     const debounce = (func, delay) => {
         let timeout;
         return function(...args) {
@@ -41,13 +59,10 @@ function inicializarDetalhesVaga(vagasUlElement, vagasSobreElement, getVagasCarr
         };
     };
 
-    // Manipulador de evento que será "debounced"
+    // --- Manipulador de Evento (Handler) ---
     const handleMouseOver = (e) => {
-        const vagaLi = e.target.closest('.vagaLI'); // Encontra o card (li) sob o mouse
+        const vagaLi = e.target.closest('.vagaLI');
         if (!vagaLi) {
-            // Se o mouse saiu de um card e está sobre a ul ou outro elemento não-card,
-            // podemos limpar a seção de detalhes ou deixar a última vaga.
-            // Por enquanto, vamos apenas não fazer nada.
             return;
         }
 
@@ -61,6 +76,6 @@ function inicializarDetalhesVaga(vagasUlElement, vagasSobreElement, getVagasCarr
         }
     };
 
-    // Adiciona o event listener com a função debounced
-    vagasUlElement.addEventListener('mouseover', debounce(handleMouseOver, 150)); // Atraso de 150ms
+    // --- Listener de Evento ---
+    vagasUlElement.addEventListener('mouseover', debounce(handleMouseOver, 150));
 }

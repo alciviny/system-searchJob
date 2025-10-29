@@ -1,23 +1,20 @@
-# Plano de Ação: Exibir Detalhes da Vaga ao Clicar
+# Feature: Detalhes da Vaga
 
-Este documento descreve os passos necessários para implementar a funcionalidade onde o clique em um card de vaga exibe seus detalhes completos na seção ao lado.
+Este documento registra o plano de ação para implementar a funcionalidade de exibição de detalhes da vaga ao passar o mouse sobre um card.
 
-**Arquivo a ser modificado:** `public/script/VagasFrontEnd.js`
+**Arquivo principal:** `public/script/VagasFrontEnd.js`
 
 ---
 
-## Passo 1: Criar a "Memória" para os Dados das Vagas
+## 1. Armazenamento de Dados em Memória
 
-**Objetivo:** Manter uma lista com os dados completos de todas as vagas carregadas, incluindo a descrição, para que possamos acessá-los a qualquer momento.
+**Objetivo:** Manter uma lista com os dados completos de todas as vagas carregadas para acesso rápido, sem a necessidade de novas requisições à API.
 
-#### Ação 1.1: Declarar a variável de "memória"
+#### 1.1. Declarar a variável de estado
 
-Na seção `VARIÁVEIS DE ESTADO`, adicione um novo array para guardar as vagas.
-
+Na seção de variáveis de estado, foi adicionado um array para armazenar as vagas.
 ```javascript
-let paginaAtual = 1;
-let buscaAtual = { cargo: '', localizacao: '', data: '0' };
-let todasVagasCarregadas = []; // <-- ADICIONAR ESTA LINHA
+let todasVagasCarregadas = [];
 ```
 
 #### Ação 1.2: Alimentar a "memória" e gerar IDs

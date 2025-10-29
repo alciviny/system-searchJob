@@ -1,23 +1,33 @@
 # Sistema VagaBot
 
-Backend para o sistema de automação de vagas.
+Um agregador de vagas de emprego que consome múltiplas APIs para centralizar as oportunidades em uma única interface. Este é o backend do projeto, construído com Node.js e Express.
 
-## Estrutura de Pastas
+---
 
-O projeto utiliza uma arquitetura baseada em Serviços, Rotas e Controladores, semelhante ao padrão MVC, para organizar o código de forma clara e escalável.
+## 🚀 Estrutura do Projeto
+
+O backend segue uma arquitetura modular e organizada, inspirada em padrões como MVC, para garantir escalabilidade e manutenibilidade.
 
 - **`/src`**: Contém todo o código-fonte da aplicação.
 
-  - **`/config`**: Arquivos de configuração. Ideal para armazenar configurações de conexão com banco de dados, chaves de API e outras variáveis de ambiente.
+  - **`/config`**: Arquivos de configuração, como conexão com banco de dados e variáveis de ambiente.
 
-  - **`/controllers`**: Responsáveis por receber as requisições das rotas, processar os dados de entrada (validar, etc.), chamar os serviços apropriados e retornar uma resposta ao cliente.
+  - **`/controllers`**: Recebem as requisições das rotas, validam os dados e orquestram a resposta, chamando os serviços necessários.
 
-  - **`/middlewares`**: Funções executadas entre o recebimento da requisição e a chegada ao controlador. Usado para tarefas como autenticação, autorização, logging, etc.
+  - **`/middlewares`**: Funções executadas entre a requisição e o controlador, usadas para tarefas como autenticação, logging, etc.
 
-  - **`/models`**: Define a estrutura e o esquema dos dados (por exemplo, Schemas do Mongoose para o MongoDB). É a representação de como os dados são armazenados no banco de dados.
+  - **`/models`**: Definição dos esquemas de dados (ex: Mongoose Schemas), representando a estrutura dos dados no banco.
 
-  - **`/routes`**: Define todos os endpoints (URLs) da API. Mapeia cada rota para o seu respectivo controlador.
+  - **`/routes`**: Mapeamento de todos os endpoints (URLs) da API para os seus respectivos controladores.
 
-  - **`/services`**: Contém a lógica de negócio principal e mais complexa da aplicação. Os controladores chamam os serviços para executar tarefas específicas (ex: criar um usuário, processar um pagamento). Isso ajuda a manter os controladores mais limpos e a reutilizar código.
+  - **`/services`**: Contém a lógica de negócio principal. É aqui que a comunicação com APIs externas e a manipulação de dados complexos acontecem.
 
-  - **`/views`**: Para aplicações que renderizam o front-end no servidor, esta pasta conteria os arquivos de visualização (HTML, EJS, Pug, etc.). Para uma API REST pura, esta pasta pode não ser utilizada.
+  - **`/views`**: Usada para renderização de templates no servidor (não utilizada em APIs REST puras).
+
+---
+
+## 🛠️ Como Executar
+
+Para instruções sobre como configurar e executar o projeto localmente, consulte o guia de contribuição:
+
+➡️ **Como Contribuir para o Sistema VagaBot**
