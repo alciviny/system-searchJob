@@ -1,5 +1,7 @@
 import { traduzirContrato } from './utils.js';
 import { inicializarDetalhesVaga } from './DetalhesVaga.js';
+import { inicializarAutenticacao } from './auth.js';
+import { inicializarFavoritos, atualizarEstadoFavoritos, listarFavoritos } from './favoritos.js';
 const API_URL = '/vagas/filtrar';
 const formulario = document.querySelector('.search-container');
 const vagasUl = document.querySelector('.vagasUl');
@@ -15,6 +17,9 @@ function criarCartaoVaga(vaga) {
     const contratoTraduzido = traduzirContrato(vaga.contrato);
     return `
     <li class="vagaLI" data-id="${vaga.id}">
+      <button class="btn-favoritar" title="Adicionar aos favoritos" aria-label="Favoritar vaga">
+        <i class="fa-solid fa-heart"></i>
+      </button>
       <h3 class="vaga-titulo">${vaga.titulo}</h3>
       ${contratoTraduzido ? `<p class="vaga-contrato">${contratoTraduzido}</p>` : ''}
       <h4 class="vaga-empresa">${vaga.empresa}</h4>
@@ -80,8 +85,12 @@ async function realizarBusca(novaBusca = false) {
         btnCarregarMais.textContent = 'Carregar Mais Vagas';
     }
 }
-document.addEventListener('DOMContentLoaded', () => realizarBusca(true));
-formulario.addEventListener('submit', (e) => {
+document.addEventListener('DOMContentLoaded', async () => {
+    inicializarAutenticacao();
+    await realizarBusca(true);
+    await inicializarFavoritos(vagasUl);
+});
+formulario.addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -91,11 +100,15 @@ formulario.addEventListener('submit', (e) => {
         formValues[key] = value;
     }
     buscaAtual = Object.assign({}, buscaAtual, formValues);
-    realizarBusca(true);
+    await realizarBusca(true);
+    const favoritosCarregados = await listarFavoritos();
+    await atualizarEstadoFavoritos(vagasUl, favoritosCarregados);
 });
-btnCarregarMais.addEventListener('click', () => {
+btnCarregarMais.addEventListener('click', async () => {
     paginaAtual++;
-    realizarBusca(false);
+    await realizarBusca(false);
+    const favoritosCarregados = await listarFavoritos();
+    await atualizarEstadoFavoritos(vagasUl, favoritosCarregados);
 });
 inicializarDetalhesVaga(vagasUl, VagasSobre, () => todasVagasCarregadas);
 hamburger.addEventListener('click', () => {

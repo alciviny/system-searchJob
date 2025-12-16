@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.ts",
   "scripts": {
-    "start": "npm run build:frontend && nodemon --exec npx ts-node -- src/app.ts",
+    "start": "nodemon --watch src --ext ts --exec \"npx ts-node --project tsconfig.server.json src/app.ts\"",
     "dev": "npm run build:frontend && concurrently \"npm run watch:frontend\" \"npm run watch:backend\"",
     "build": "npm run build:backend && npm run build:frontend",
     "build:backend": "tsc --project tsconfig.server.json",
@@ -32,6 +32,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.4.1",
     "node-cron": "^3.0.3"
   },
@@ -39,6 +40,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.14.2",
     "@types/node-cron": "^3.0.11",
     "concurrently": "^9.2.1",

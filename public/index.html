@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VagasBrasil</title>
-    <link rel="stylesheet" href="script/src/vagas.css"> 
+    <link rel="stylesheet" href="script/src/vagas.css">
+    <link rel="stylesheet" href="script/src/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/197/197386.png">
 </head>
 <body>
@@ -81,6 +83,27 @@
            </div>
         </div>
     </main>
+
+    <!-- Modal de Login -->
+    <div id="modal-login" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Login</h2>
+            <form id="formulario-login">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div id="login-error" class="login-error"></div>
+                <button type="submit" class="btn btn-login-submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Scripts TypeScript compilados para JavaScript -->
     <script type="module" src="script/VagasFrontEnd.js"></script>
 </body>

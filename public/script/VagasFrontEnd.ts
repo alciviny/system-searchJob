@@ -1,5 +1,7 @@
 import { Vaga, traduzirContrato } from './utils.js';
 import { inicializarDetalhesVaga } from './DetalhesVaga.js';
+import { inicializarAutenticacao } from './auth.js';
+import { inicializarFavoritos, atualizarEstadoFavoritos, listarFavoritos } from './favoritos.js';
 
 interface BuscaAtual {
   cargo: string;
@@ -27,6 +29,9 @@ function criarCartaoVaga(vaga: Vaga): string {
   
   return `
     <li class="vagaLI" data-id="${vaga.id}">
+      <button class="btn-favoritar" title="Adicionar aos favoritos" aria-label="Favoritar vaga">
+        <i class="fa-solid fa-heart"></i>
+      </button>
       <h3 class="vaga-titulo">${vaga.titulo}</h3>
       ${contratoTraduzido ? `<p class="vaga-contrato">${contratoTraduzido}</p>` : ''}
       <h4 class="vaga-empresa">${vaga.empresa}</h4>
@@ -100,9 +105,13 @@ async function realizarBusca(novaBusca: boolean = false): Promise<void> {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => realizarBusca(true));
+document.addEventListener('DOMContentLoaded', async () => {
+  inicializarAutenticacao();
+  await realizarBusca(true);
+  await inicializarFavoritos(vagasUl);
+});
 
-formulario.addEventListener('submit', (e: Event) => {
+formulario.addEventListener('submit', async (e: Event) => {
   e.preventDefault();
   const form = e.target as HTMLFormElement;
   const formData = new FormData(form);
@@ -115,12 +124,16 @@ formulario.addEventListener('submit', (e: Event) => {
   }
   
   buscaAtual = Object.assign({}, buscaAtual, formValues);
-  realizarBusca(true);
+  await realizarBusca(true);
+  const favoritosCarregados = await listarFavoritos();
+  await atualizarEstadoFavoritos(vagasUl, favoritosCarregados);
 });
 
-btnCarregarMais.addEventListener('click', () => {
+btnCarregarMais.addEventListener('click', async () => {
   paginaAtual++;
-  realizarBusca(false);
+  await realizarBusca(false);
+  const favoritosCarregados = await listarFavoritos();
+  await atualizarEstadoFavoritos(vagasUl, favoritosCarregados);
 });
 
 inicializarDetalhesVaga(vagasUl, VagasSobre, () => todasVagasCarregadas);
