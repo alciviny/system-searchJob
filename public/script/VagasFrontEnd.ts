@@ -1,0 +1,130 @@
+import { Vaga, traduzirContrato } from './utils.js';
+import { inicializarDetalhesVaga } from './DetalhesVaga.js';
+
+interface BuscaAtual {
+  cargo: string;
+  localizacao: string;
+  data: string;
+  [key: string]: string;
+}
+
+const API_URL = '/vagas/filtrar';
+
+const formulario = document.querySelector('.search-container') as HTMLFormElement;
+const vagasUl = document.querySelector('.vagasUl') as HTMLUListElement;
+const btnCarregarMais = document.getElementById('btn-carregar-mais') as HTMLButtonElement;
+const hamburger = document.querySelector('.hamburger-menu') as HTMLElement;
+const headerContent = document.querySelector('.header-content') as HTMLElement;
+const VagasSobre = document.querySelector('.sobre') as HTMLElement;
+
+let paginaAtual = 1;
+let buscaAtual: BuscaAtual = { cargo: '', localizacao: '', data: '0' };
+let todasVagasCarregadas: Vaga[] = [];
+
+function criarCartaoVaga(vaga: Vaga): string {
+  const dataFormatada = new Date(vaga.data).toLocaleDateString('pt-BR');
+  const contratoTraduzido = traduzirContrato(vaga.contrato);
+  
+  return `
+    <li class="vagaLI" data-id="${vaga.id}">
+      <h3 class="vaga-titulo">${vaga.titulo}</h3>
+      ${contratoTraduzido ? `<p class="vaga-contrato">${contratoTraduzido}</p>` : ''}
+      <h4 class="vaga-empresa">${vaga.empresa}</h4>
+      <p class="vaga-localizacao">${vaga.localizacao}</p>
+      <p class="vaga-fonte">Fonte: ${vaga.fonte || 'Desconhecida'}</p>
+      <p class="vaga-data">Publicado em: ${dataFormatada}</p>
+      <p class="vaga-sobre"><a href="${vaga.url}" target="_blank" class="vaga-botao-inscricao">Ver Vaga</a></p>
+    </li>
+  `;
+}
+
+async function realizarBusca(novaBusca: boolean = false): Promise<void> {
+  btnCarregarMais.disabled = true;
+  btnCarregarMais.textContent = 'Carregando...';
+
+  if (novaBusca) {
+    paginaAtual = 1;
+    vagasUl.innerHTML = '';
+    VagasSobre.innerHTML = `
+      <div class="sobre-placeholder">
+        <i class="fa-solid fa-hand-pointer"></i>
+        <h3>Passe o mouse sobre uma vaga</h3>
+        <p>Veja os detalhes aqui</p>
+      </div>
+    `;
+  }
+
+  const params = new URLSearchParams({
+    ...buscaAtual,
+    page: paginaAtual.toString()
+  });
+
+  const queryString = params.toString();
+  
+  try {
+    const response = await fetch(`${API_URL}?${queryString}`);
+    
+    if (!response.ok) {
+      throw new Error(`A resposta da rede não foi OK. Status: ${response.status}`);
+    }
+    
+    const vagasEncontradas: Vaga[] = await response.json();
+
+    const vagasComId = vagasEncontradas.map((vaga) => ({
+      ...vaga,
+      id: vaga.id || `${vaga.titulo}-${vaga.empresa}-${vaga.localizacao}-${vaga.data}`
+    }));
+    
+    todasVagasCarregadas = todasVagasCarregadas.concat(vagasComId);
+
+    if (vagasEncontradas.length === 0) {
+      if (novaBusca) {
+        vagasUl.innerHTML = `<li class="vaga-aviso">Nenhuma vaga encontrada para esta busca.</li>`;
+      }
+      btnCarregarMais.style.display = 'none';
+    } else {
+      const cardsHtml = vagasComId.map(criarCartaoVaga).join('');
+      vagasUl.insertAdjacentHTML('beforeend', cardsHtml);
+      btnCarregarMais.style.display = 'inline-block';
+    }
+  } catch (error) {
+    console.error('Erro ao buscar vagas:', error);
+    if (novaBusca) {
+      vagasUl.innerHTML = `<li class="vaga-aviso error">Ocorreu um erro ao buscar as vagas. Tente novamente.</li>`;
+    }
+    btnCarregarMais.textContent = 'Erro ao carregar';
+    btnCarregarMais.style.display = 'none';
+  } finally {
+    btnCarregarMais.disabled = false;
+    btnCarregarMais.textContent = 'Carregar Mais Vagas';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => realizarBusca(true));
+
+formulario.addEventListener('submit', (e: Event) => {
+  e.preventDefault();
+  const form = e.target as HTMLFormElement;
+  const formData = new FormData(form);
+  
+  const formValues: Record<string, any> = {};
+  const entries = (formData as any).entries ? (formData as any).entries() : [];
+  
+  for (const [key, value] of entries) {
+    formValues[key] = value;
+  }
+  
+  buscaAtual = Object.assign({}, buscaAtual, formValues);
+  realizarBusca(true);
+});
+
+btnCarregarMais.addEventListener('click', () => {
+  paginaAtual++;
+  realizarBusca(false);
+});
+
+inicializarDetalhesVaga(vagasUl, VagasSobre, () => todasVagasCarregadas);
+
+hamburger.addEventListener('click', () => {
+  headerContent.classList.toggle('active');
+});

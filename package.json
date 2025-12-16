@@ -2,9 +2,16 @@
   "name": "sistema-automacao",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.ts",
   "scripts": {
-    "start": "nodemon src/app.js",
+    "start": "npm run build:frontend && nodemon --exec npx ts-node -- src/app.ts",
+    "dev": "npm run build:frontend && concurrently \"npm run watch:frontend\" \"npm run watch:backend\"",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "tsc --project tsconfig.server.json",
+    "build:frontend": "tsc --project tsconfig.client.json",
+    "watch:backend": "nodemon --watch src --exec npx ts-node -- src/app.ts",
+    "watch:frontend": "tsc --project tsconfig.client.json --watch",
+    "clean": "rimraf \"dist\" && rimraf \"public/script/*.js\" && rimraf \"public/script/*.js.map\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,15 +27,24 @@
   },
   "homepage": "https://github.com/alciviny/sistema-vagaBot#readme",
   "dependencies": {
-    "axios": "^1.12.2",
-    "bcryptjs": "^3.0.2",
+    "axios": "^1.7.2",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "mongoose": "^8.19.2",
-    "node-cron": "^4.2.1"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1",
+    "node-cron": "^3.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.2",
+    "@types/node-cron": "^3.0.11",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.2",
+    "rimraf": "^6.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }

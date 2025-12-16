@@ -1,6 +1,11 @@
 # Dependencies
 /node_modules
 
+# Build outputs
+/dist
+/public/script/**/*.js
+/public/script/**/*.js.map
+
 # Environment variables
 .env
 
